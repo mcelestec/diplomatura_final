@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CeGluFree</title>
+    <link rel="stylesheet" href="/stylesheets/normalize.css">
+    <link rel="stylesheet" href="/stylesheets/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="/images/logo.jpg" alt="Logo gluten free">
+        </div>
+        {{#if id_usuario}}
+            <div class="user-data">
+                <span>Hola {{nombre_usuario}} - <a href="/admin/login/logout">Cerrar sesión</a></span>
+            </div>
+        {{/if}} 
+   </header>
+    <main class="main-info">
+        {{{body}}}
+     </main>
+    <footer>
+        <p>Diseñado por Celeste Carignano - &copy;2022</p>
+    </footer>
+
+</body>
+
+</html>

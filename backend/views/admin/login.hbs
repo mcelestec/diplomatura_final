@@ -1,0 +1,25 @@
+<div class="div-login">
+    <div class="div-login-content">
+        <h1>CeGluFree - Login</h1>
+
+        {{#if error}}
+        <p class="error">Usuario o contraseña incorrectos</p>
+        {{/if}} 
+        
+        <form action="/admin/login" method="post" class="form-login">
+            <p class="normal-input-container">
+                <input type="text" name="usuario" placeholder="Usuario" />
+            </p>
+
+            <p class="normal-input-container">
+                <input type="password" name="password" placeholder="Contraseña"/>
+            </p>
+
+            <p class="normal-input-container">
+                <button class="button-large">Enviar</button>
+            </p>
+
+        </form>
+
+    </div>    
+</div>    

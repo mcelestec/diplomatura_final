@@ -1,0 +1,151 @@
+.main-recetas {
+    position: fixed;
+    top: 8em;
+    width: calc(100% - 2em);
+    left: 0;
+    padding: 1em;
+    height: calc(100vh - 8em - 6em);
+    background-color: white;
+    overflow-y: scroll;
+}
+
+.recetas {
+    width: 100%;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: space-evenly;
+}
+
+.tab-receta {
+    opacity: 0;
+    background-color: #cbdbda6e;
+    width: 20em;
+    height: 13.45em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: -13.65em;
+    margin-bottom: 2em;
+    position: absolute;
+    transition: all 1s;
+    cursor: pointer;
+}
+
+.tab-receta a {
+    text-decoration: none;
+    color: black;
+}
+
+.tab-receta a p {
+    text-transform: uppercase;
+    font-style: italic;
+    font-size: 1.4em;
+    padding: 1em;
+    font-weight: 600;
+    text-align: center;
+    line-height: 2em;
+}
+
+.receta img {
+    width: 20em;
+}
+
+.receta:hover .tab-receta {
+    opacity: 1;
+}
+
+.lista-recetas {
+    display: block;
+}
+
+.item-receta img,
+.item-receta .div-img  {
+    max-width: 40%;
+    min-width: 40%;
+    min-height: 30em;
+    box-shadow: 5px 5px 5px #ddd;
+    background-color: #e1e1e1;
+    font-style: italic;
+    font-size: 0.8em;
+}
+
+.item-receta {
+    display: inline-flex;
+    width: 100%;
+    align-items: flex-start;
+    margin-top: 1em;
+    border-top: 1px solid #cbdbda;
+    padding-top: 2em;
+}
+
+.item-receta:first-child {
+    border: none;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.tab-item-receta {
+    margin-left: 2em;
+}
+
+.boton-volver {
+    text-decoration: none;
+    background-color: white;
+    color: black;
+    border: 4px solid #00c4ff;
+    float: right;
+    margin-right: 2em;
+    padding: 1em 2em;
+    font-weight: 600;
+    border-radius: 35px;
+}
+
+.boton-volver:hover {
+    border: 4px solid #00c4ff;
+    background-color: black;
+    color: white;
+    border-radius: 35px;
+}
+
+
+@media only screen and (max-width: 768px) {
+
+
+    .recetas {
+        width: 100%;
+        display: inline-flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .receta {
+        margin-bottom: 1em;
+    }
+
+    .tab-receta {
+        opacity: 1;
+        transition: none;
+    }
+
+    .item-receta {
+        flex-direction: column;
+    }
+
+    .item-receta img {
+        width: 100%;
+    }
+
+    .info-img-container {
+        display: none;
+    }
+
+    .tabs {
+        margin: 0;
+        width: 100%;
+    }
+
+    .checkbox:checked ~ .tab-content {
+        padding: 0;
+    }
+}

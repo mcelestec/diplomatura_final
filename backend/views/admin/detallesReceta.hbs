@@ -1,0 +1,194 @@
+<div class="titulo-contenedor">
+    <div class="titulo-contenido">
+        <h1>Completar receta {{receta.tipo}}: {{receta.titulo}}</h1> 
+        <h3>Publicada {{receta.fechaPublicacion}}</h3>
+    </div>
+
+    <div class="form-recetas">
+        <div class="normal-input-container">
+            <a class="link-button-large" href="/admin/recetas">Volver</a>
+           <a class="link-button-large" href="/admin/recetas/vistaPrevia/{{receta.id}}">Vista previa</a>
+        </div> 
+    </div>
+</div>
+
+<div class="lista-recetas">
+    <h3>Ingredientes</h3>
+
+    <table class="recetas-table">
+        <thead>
+            <tr>
+                <th class="acciones-th"><a class="nueva-boton" href="/admin/detallesReceta/nuevoIngrediente">+</a></th>
+                <th>Descripción</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each ingredientes}}
+                <tr>
+                    <td> <a class="boton-icon boton-modificar" href="/admin/detallesReceta/modificarIngrediente/{{id}}"></a> 
+                         <a class="boton-icon boton-eliminar" href="/admin/detallesReceta/eliminarIngrediente/{{id}}"></a></td>
+                    <td>{{descripcion}}</td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+<div class="lista-recetas">
+    <h3>Instrucciones</h3>
+
+    <table class="recetas-table">
+        <thead>
+            <tr>
+                <th class="acciones-th"><a class="nueva-boton" href="/admin/detallesReceta/nuevaInstruccion">+</a></th>
+                <th>Descripción</th>
+                <th>Orden</th>
+        </tr>
+        </thead>
+        <tbody>
+            {{#each instrucciones}}
+                <tr>
+                    <td> <a class="boton-icon boton-modificar" href="/admin/detallesReceta/modificarInstruccion/{{id}}"></a> 
+                         <a class="boton-icon boton-eliminar" href="/admin/detallesReceta/eliminarInstruccion/{{id}}"></a></td>
+                    <td>{{descripcion}}</td>
+                    <td>{{orden}}</td>
+               </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+
+{{#if process_error}}
+<div class="modal">
+    <div class="recetas">
+        <h3>Error</h3> 
+        <p class="error">{{message}}</p>
+        <div class="form-recetas">
+            <div class="normal-input-container">
+                <a class="link-button-large" href="/admin/recetas/modificarDetallesReceta/{{receta.id}}">Cerrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}} 
+
+
+{{#if showNewIngredienteModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>{{receta.titulo}}: Nuevo ingrediente</h2> 
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/detallesReceta/crearIngrediente" method="post" class="form-recetas">
+            <input type="hidden" name="idReceta" value="{{receta.id}}">
+
+            <div class="normal-input-container">
+                <input type="text" name="descripcion" placeholder="Descripcion"/>
+            </div>
+
+            <div class="normal-input-container">
+                <a class="link-button-large" href="/admin/recetas/modificarDetallesReceta/{{receta.id}}">Cerrar</a>
+    
+                <button class="button-large">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}
+
+
+{{#if showModificarIngredienteModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>{{receta.titulo}}: Modificar ingrediente</h2> 
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/detallesReceta/actualizarIngrediente" method="post" class="form-recetas">
+            <input type="hidden" name="idReceta" value="{{ingrediente.idReceta}}">
+            <input type="hidden" name="id" value="{{ingrediente.id}}">
+
+            <div class="normal-input-container">
+                <input type="text" name="descripcion" placeholder="Descripcion" value="{{ingrediente.descripcion}}"/>
+            </div>
+
+            <div class="normal-input-container">
+                <a class="link-button-large" href="/admin/recetas/modificarDetallesReceta/{{ingrediente.idReceta}}">Cerrar</a>
+    
+                <button class="button-large">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}
+
+{{#if showNewInstruccionModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>{{receta.titulo}}: Nueva Instrucción</h2> 
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/detallesReceta/crearInstruccion" method="post" class="form-recetas">
+            <input type="hidden" name="idReceta" value="{{receta.id}}">
+
+            <div class="normal-input-container">
+                <input type="text" name="descripcion" placeholder="Descripcion" value="{{instruccion.descripcion}}"/>
+            </div>
+
+            <div class="normal-input-container">
+                <input type="number" name="orden" placeholder="Orden" min="0" value="{{instruccion.orden}}"/>
+            </div>
+
+            <div class="normal-input-container">
+                <a class="link-button-large" href="/admin/recetas/modificarDetallesReceta/{{receta.id}}">Cerrar</a>
+    
+                <button class="button-large">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}
+
+
+{{#if showModificarInstruccionModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>{{receta.titulo}}: Modificar Instrucción</h2> 
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/detallesReceta/actualizarInstruccion" method="post" class="form-recetas">
+            <input type="hidden" name="idReceta" value="{{instruccion.idReceta}}">
+            <input type="hidden" name="id" value="{{instruccion.id}}">
+
+            <div class="normal-input-container">
+                <input type="text" name="descripcion" placeholder="Descripcion" value="{{instruccion.descripcion}}"/>
+            </div>
+
+            <div class="normal-input-container">
+                <input type="number" name="orden" placeholder="Orden" value="{{instruccion.orden}}" min="0"/>
+            </div>
+
+            <div class="normal-input-container">
+                <a class="link-button-large" href="/admin/recetas/modificarDetallesReceta/{{instruccion.idReceta}}">Cerrar</a>
+    
+                <button class="button-large">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}

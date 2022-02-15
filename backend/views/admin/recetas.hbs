@@ -1,0 +1,197 @@
+<h1>Recetas</h1>
+
+<div>
+    <div>
+        <table class="recetas-table">
+            <thead>
+                <tr>
+                    <th class="acciones-th-large"><a class="nueva-boton" href="/admin/recetas/nuevaReceta">+</a></th>
+                    <th>Titulo</th>
+                    <th>Tipo</th>
+                    <th>Imagen</th>                    
+                    <th>Fecha de publicación</th>
+               </tr>
+            </thead>
+            <tbody>
+                {{#each recetas}}
+                    <tr>
+                        <td> 
+                           <a class="boton-icon boton-modificar" href="/admin/recetas/modificarReceta/{{id}}" title="Modificar"></a> 
+                           <a class="boton-icon boton-subir-imagen" href="/admin/recetas/subirImagenReceta/{{id}}" title="Subir imagen"></a> 
+                           <a class="boton-icon boton-modificar-listas" href="/admin/recetas/modificarDetallesReceta/{{id}}" title="Completar"></a> 
+                           <a class="boton-icon boton-vista-previa" href="/admin/recetas/vistaPrevia/{{id}}" title="Vista previa"></a> 
+                           <a class="boton-icon boton-eliminar" href="/admin/recetas/eliminarReceta/{{id}}" title="Eliminar"></a></td>
+                        <td>{{titulo}}</td>
+                        <td>{{tipo}}</td>
+                        <td>{{nombre_imagen}}</td>
+                        <td>{{fechaPublicacion}}</td>
+                    </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{{#if process_error}}
+<div class="modal">
+    <div class="recetas">
+        <h3>Error</h3> 
+        <p class="error">{{message}}</p>
+        <div class="form-recetas">
+            <div class="normal-input-container">
+                <a class="link-button-large" href="/admin/recetas">Cerrar</a>
+            </div>
+        </div>
+    </div>
+</div>
+{{/if}} 
+
+{{#if showNewModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>Nueva receta</h2> 
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/recetas/guardarNuevaReceta" method="post" class="form-recetas">
+            <div class="normal-input-container">
+                <input type="text" name="titulo" placeholder="Titulo" value="{{receta.titulo}}"/>
+            </div>
+
+            <div class="normal-input-container">
+                <div class="radiobutton-group">
+                    {{#if_equal receta.tipo "dulce"}}
+                        <input type="radio" id="dulce" name="tipo" value="dulce" checked>
+                    {{else}}
+                        <input type="radio" id="dulce" name="tipo" value="dulce">
+                    {{/if_equal}}
+                    <label for="dulce">Dulce</label>
+
+                    {{#if_equal receta.tipo "salada"}}
+                        <input type="radio" id="salada" name="tipo" value="salada" checked>
+                    {{else}}
+                        <input type="radio" id="salada" name="tipo" value="salada">
+                    {{/if_equal}}
+                    <label for="salada">Salada</label>
+                </div>
+            </div>
+
+            <div class="normal-button-container">
+                <a class="link-button-large" href="/admin/recetas">Cerrar</a>
+    
+                <button class="button-large">Guardar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}
+
+{{#if showEditModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>Modificar receta {{receta.tipo}}</h2> 
+        <h4>Publicada {{receta.fechaPublicacion}}</h4>
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/recetas/actualizarReceta" method="post" class="form-recetas">
+            <input type="hidden" name="id" value="{{receta.id}}">
+            <input type="hidden" name="fechaPublicacion" value="{{receta.fechaPublicacion}}">
+
+            <div class="normal-input-container">
+                <input type="text" name="titulo" placeholder="Titulo" value="{{receta.titulo}}"/>
+            </div>
+
+            <div class="normal-input-container">
+                <div class="radiobutton-group">
+                    {{#if_equal receta.tipo "dulce"}}
+                        <input type="radio" id="dulce" name="tipo" value="dulce" checked>
+                    {{else}}
+                        <input type="radio" id="dulce" name="tipo" value="dulce">
+                    {{/if_equal}}
+                    <label for="dulce">Dulce</label>
+
+                    {{#if_equal receta.tipo "salada"}}
+                        <input type="radio" id="salada" name="tipo" value="salada" checked>
+                    {{else}}
+                        <input type="radio" id="salada" name="tipo" value="salada">
+                    {{/if_equal}}
+                    <label for="salada">Salada</label>
+                </div>
+            </div>         
+
+            <div class="normal-button-container">
+                <a class="link-button-large" href="/admin/recetas">Cerrar</a>
+    
+                <button class="button-large">Actualizar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}
+
+
+{{#if showConfirmUploadImageModal}} 
+<div class="modal">
+    <div class="recetas">
+        <h2>Imagen de {{receta.titulo}}</h2> 
+        <h4>Receta {{receta.tipo}} publicada {{receta.fechaPublicacion}}</h4>
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <div class="form-recetas">
+
+            <div class="mensaje-confirmacion">
+                <span>Ya existe una imagen asociada a esta receta ({{receta.nombre_imagen}}).</span>
+                
+                <span>¿Desea eliminarla o reemplazarla?</span>
+            </div>
+   
+            <div class="normal-button-container">
+                <a class="link-button-large" href="/admin/recetas">Cancelar</a>
+                <a class="link-button-large" href="/admin/recetas/eliminarImagen/{{receta.id}}/{{receta.imagen}}">Eliminar</a>
+                <a class="link-button-large" href="/admin/recetas/modificarImagen">Reemplazar</a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{{/if}}
+
+{{#if showUploadImageModal}}
+<div class="modal">
+    <div class="recetas">
+        <h2>Imagen de {{receta.titulo}}</h2> 
+        <h4>Receta {{receta.tipo}} publicada {{receta.fechaPublicacion}}</h4>
+
+        {{#if error}}
+        <p class="error">{{message}}</p>
+        {{/if}} 
+
+        <form action="/admin/recetas/uploadImage" method="post" class="form-recetas"
+            enctype="multipart/form-data">
+            <input type="hidden" name="id" value="{{receta.id}}">
+            <input type="hidden" name="idImagenAnterior" value="{{receta.imagen}}">
+
+            <div class="normal-input-container">
+                <input type="file" name="imagen" placeholder="Imagen" id="imagen" accept="image/*"/>
+            </div>
+
+            <div class="normal-button-container">
+                <a class="link-button-large" href="/admin/recetas">Cerrar</a>
+    
+                <button class="button-large">Actualizar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+{{/if}}

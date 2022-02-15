@@ -1,0 +1,37 @@
+<div class="titulo-contenedor">
+    <div class="titulo-contenido">
+        <h1>Vista previa: {{receta.titulo}} (receta {{receta.tipo}})</h1> 
+        <h3>Publicada {{receta.fechaPublicacion}}</h3>
+    </div>
+
+    <div class="form-recetas">
+        <div class="normal-input-container">
+            <a class="link-button-large" href="/admin/recetas">Volver</a>
+        </div>
+    </div>
+</div>
+
+<div class="item-receta">
+    {{#if imagen_receta}}
+        {{{imagen_receta}}}
+    {{else}}
+        <div class="div-img" >Imagen de {{receta.titulo}}</div>
+    {{/if}}
+
+    <div class="tab-item-receta">
+        <h3>{{receta.titulo}}</h3>
+        <h4>Ingredientes</h4>
+        <ul>
+            {{#each ingredientes}}
+                <li>{{descripcion}}</li>
+            {{/each}}
+        </ul>
+        <h4>Instrucciones</h4>
+        <ol>
+            {{#each instrucciones}}
+                <li>{{descripcion}}</li>
+            {{/each}}
+        </ol>
+        <a class="boton-volver" href="">Volver a Recetas</a>
+    </div>
+</div>

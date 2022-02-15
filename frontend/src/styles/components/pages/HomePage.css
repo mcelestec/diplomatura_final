@@ -1,0 +1,126 @@
+
+.main-home {
+    height: calc(100vh - 10em - 6em);
+    background-color: black;
+    display: inline-flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    top: 8em;
+    left: 0;
+    position: fixed;
+    padding-top: 2em;
+}
+
+
+.home-img-container {
+    width: 60%;
+}
+
+.recetario-container {
+    width: 40%;
+    margin: 0 5em 3em 5em;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.home-img {
+    float: right;
+    max-height: calc(100vh - 11em);
+    margin-right: 3em;
+    width: 100%;
+}
+
+.button-large {
+    padding: 1em 2em;
+    font-weight: 600;
+    border-radius: 35px;
+    text-transform: uppercase;
+    background-color: white;
+    color: black;
+    border: 4px solid white;
+    cursor: pointer;
+}
+
+.button-large:hover {
+    background-color: black;
+    color: white;
+    border: 4px solid #00c4ff;
+}
+
+.recetario-container h2 {
+    color: #00c4ff;
+}
+
+.recetario-container p {
+    color: white;
+    line-height: 2em;
+    font-size: 0.9em;
+    text-align: justify;
+}
+
+
+@media screen and (max-width:992px) {
+    .home-img-container {
+        width: 100%;
+    }
+
+    .home-img {
+        margin: 2em 0.2em;
+        padding: 0;
+        width: calc(100% - 0.4em);
+        max-height: none;
+        float: none;
+    }
+
+    .recetario-container {
+        width: 50%;
+        margin: 2em;
+        align-items: center;
+    }
+
+}
+
+
+@media only screen and (max-width: 768px) {
+
+    .menu-icon {
+        display: inline-block;
+        font-family: 'Material Icons';
+        font-size: 1.6em;
+        cursor: pointer;
+        color: #666;
+        vertical-align: bottom;
+        margin-right: 0.3rem;
+    }
+
+    .main-home {
+        flex-direction: column-reverse;
+        justify-content: flex-end;
+        align-items: center;
+        padding-top: 0em;
+    }
+
+    .main-info,
+    .main-recetas {
+        padding-bottom: 20%;
+        height: calc(100vh - 14em - 4em);
+	}
+
+    .button-large {
+        margin-left: 0;
+    }
+
+    .recetario-container {
+        width: 100%;
+    }
+
+    .recetario-container h2, .recetario-container p {
+        display: none;
+    }
+
+}

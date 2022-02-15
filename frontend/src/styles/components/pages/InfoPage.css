@@ -1,0 +1,81 @@
+.main-info {
+    position: fixed;
+    top: 8em;
+    width: calc(100% - 2em);
+    left: 0;
+    padding: 1em;
+    height: calc(100vh - 10em - 4em);
+    background-color: white;
+    overflow-y: scroll;
+}
+
+.tabs {
+    border-radius: 8px;
+    box-shadow: 0 4px 4px -2px rgba(0,0,0,0.5);
+    margin: 2em auto;
+    width: 80%;
+}
+
+.tab {
+    width: 100%;
+    color: black;
+    border: 1px solid white;
+}
+
+.tab-label {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+    background: #ddd;
+    cursor: pointer;
+}
+
+.tab-label:hover {
+    background: #cbdbda;
+}
+
+.tab-label::after {
+    content: "\276F";
+    width: 1em;
+    height: 1em;
+    text-align: center;
+    transition: all .35s;
+}
+
+.tab-content {
+    display: none;
+}
+
+.info-img-container {
+    width: 20rem;
+    margin-right: 1em;
+}
+
+.tab-content img {
+    width: 100%;    
+}
+
+.checkbox  {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+.checkbox:checked ~ .tab-label {
+    background: #cbdbda;
+}
+
+.checkbox:checked ~ .tab-label::after {
+    transform: rotate(90deg);
+}
+
+.checkbox:checked ~ .tab-content {
+    padding: 1em 0;
+    color: #666;
+    transition: all .35s;
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    margin: 0.5rem;
+    width: 95%;
+}
